@@ -10,6 +10,7 @@ import { AuthInfo } from '../playground/HOC';
 import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
 import { addExpense } from '../actions/expensesActions';
+import '../firebase/firebase';
 
 const store = configureStore();
 

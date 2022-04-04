@@ -28,7 +28,7 @@ initializeApp(config);
 // get our database
 export const database = getDatabase();
 // we can set up a reference right into variables
-const databaseRef = ref(database);
+// const databaseRef = ref(database);
 // const databaseExpensesRef = ref(database, 'expenses');
 // const databaseNotesRef = ref(database, 'notes');
 // const databaseAgeRef = ref(database, 'age');

@@ -11,6 +11,9 @@ import {
 	onChildRemoved,
 	onChildChanged,
 	onChildAdded,
+	get,
+	child,
+	exists,
 } from 'firebase/database';
 
 // heres our normal action generator for saving things to our local store
@@ -62,3 +65,36 @@ export const editExpense = (id, updates = {}) => ({
 	id,
 	updates,
 });
+
+export const setExpenses = expenses => ({
+	type: 'SET_EXPENSES',
+	expenses,
+});
+
+// here we get all of our expenses from a database
+export const startSetExpenses = () => {
+	return dispatch => {
+		const databaseExpensesRef = ref(database, `expenses`);
+
+		return get(databaseExpensesRef)
+			.then(snapshot => {
+				if (snapshot.exists()) {
+					const expenses = [];
+
+					snapshot.forEach(childShapshot => {
+						expenses.push({
+							id: childShapshot.key,
+							...childShapshot.val(),
+						});
+					});
+					// now we dispatch our info to our local store
+					dispatch(setExpenses(expenses));
+				} else {
+					console.log(`No data available`);
+				}
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+};

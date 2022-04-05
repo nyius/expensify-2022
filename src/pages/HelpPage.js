@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 
 export const HelpPage = () => (
 	<div>
-		<p>THis is from my Help component</p>
+		<p>Comign soon...</p>
 	</div>
 );

@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 import {
 	getDatabase,
 	ref,
@@ -27,6 +28,12 @@ initializeApp(config);
 
 // get our database
 export const database = getDatabase();
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+	prompt: 'select_account',
+});
+export const auth = getAuth();
+
 // we can set up a reference right into variables
 // const databaseRef = ref(database);
 // const databaseExpensesRef = ref(database, 'expenses');

@@ -26,11 +26,14 @@ export const addExpense = expense => ({
 export const startAddExpense = (expenseData = {}) => {
 	// because we use thunk, we are able to return a function (and not an object)
 	// we get access to a dispatch variable, so we can use dispatch inside of our return function
-	return dispatch => {
+	//thunk also gives is a getState param, that we can use to get the current state
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
 		// here we're just taking our function arguments and destructuring it (for this exampel)
 		const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
 		// set up a ref to where we want our data to go, in this case inside of our expenses object on the db
-		const databaseExpensesRef = ref(database, 'expenses');
+		// were going to dynamically add in the users uid and set to their expenses
+		const databaseExpensesRef = ref(database, `users/${uid}/expenses`);
 
 		const expense = { description, note, amount, createdAt };
 
@@ -61,8 +64,9 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const startRemoveExpense = ({ id } = {}) => {
-	return dispatch => {
-		const databaseExpensesRef = ref(database, `expenses/${id}`);
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+		const databaseExpensesRef = ref(database, `users/${uid}/expenses/${id}`);
 
 		return remove(databaseExpensesRef)
 			.then(() => {
@@ -81,8 +85,9 @@ export const editExpense = (id, updates = {}) => ({
 });
 
 export const startEditExpense = (id, updates = {}) => {
-	return dispatch => {
-		const databaseExpensesRef = ref(database, `expenses/${id}`);
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+		const databaseExpensesRef = ref(database, `users/${uid}/expenses/${id}`);
 
 		return update(databaseExpensesRef, updates)
 			.then(() => {
@@ -101,8 +106,9 @@ export const setExpenses = expenses => ({
 
 // here we get all of our expenses from a database
 export const startSetExpenses = () => {
-	return dispatch => {
-		const databaseExpensesRef = ref(database, `expenses`);
+	return (dispatch, getState) => {
+		const uid = getState().auth.uid;
+		const databaseExpensesRef = ref(database, `users/${uid}/expenses`);
 
 		return get(databaseExpensesRef)
 			.then(snapshot => {

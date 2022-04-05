@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { ExpenseForm } from '../components/ExpenseForm';
 import { connect } from 'react-redux';
 import { startAddExpense } from '../actions/expensesActions';

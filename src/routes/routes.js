@@ -7,8 +7,6 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 import { HelpPage } from '../pages/HelpPage';
 import { Redux101Page } from '../playground/redux-101Page';
 import { AuthInfo } from '../playground/HOC';
-import { addExpense } from '../actions/expensesActions';
-import { startSetExpenses } from '../actions/expensesActions';
 import '../firebase/firebase';
 
 // const store = configureStore();

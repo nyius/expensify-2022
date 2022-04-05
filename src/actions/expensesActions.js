@@ -41,7 +41,7 @@ export const startAddExpense = (expenseData = {}) => {
 			// get access to the uploaded object (labeled as ref here), which we can then use
 			// now we are going to push that data we uploaded also to our local store using our normal
 			//dispatch() action and passing in our regular non async function
-			push(databaseExpensesRef, expense).then(ref => {
+			return push(databaseExpensesRef, expense).then(ref => {
 				dispatch(
 					addExpense({
 						id: ref.key,
@@ -60,11 +60,39 @@ export const removeExpense = ({ id } = {}) => ({
 	id,
 });
 
+export const startRemoveExpense = ({ id } = {}) => {
+	return dispatch => {
+		const databaseExpensesRef = ref(database, `expenses/${id}`);
+
+		return remove(databaseExpensesRef)
+			.then(() => {
+				dispatch(removeExpense({ id }));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+};
+
 export const editExpense = (id, updates = {}) => ({
 	type: 'EDIT_EXPENSE',
 	id,
 	updates,
 });
+
+export const startEditExpense = (id, updates = {}) => {
+	return dispatch => {
+		const databaseExpensesRef = ref(database, `expenses/${id}`);
+
+		return update(databaseExpensesRef, updates)
+			.then(() => {
+				dispatch(editExpense(id, updates));
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+};
 
 export const setExpenses = expenses => ({
 	type: 'SET_EXPENSES',

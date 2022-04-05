@@ -129,6 +129,33 @@ header {
 	&-edit {
 		display: flex;
 		margin: 0 4rem;
+
+		&-Link {
+			text-decoration: none;
+			border: none;
+			background-color: $color-dark-3;
+			color: $color-light-2;
+			padding: 0.5rem;
+			width: 5rem;
+			font-size: 1.5rem;
+			border-radius: 5px;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $color-main-2;
+			}
+		}
+	}
+
+	&-remove {
+		background-color: $color-dark-3;
+		color: $color-light-2;
+		margin-left: 1rem;
+		font-size: 1.5rem;
+
+		&:hover {
+			background-color: $color-red-1;
+		}
 	}
 
 	&:hover {
@@ -194,22 +221,6 @@ button {
 		cursor: pointer;
 		background-color: $color-main-2;
 		color: white;
-	}
-}
-
-.expense_list_item-edit-Link {
-	text-decoration: none;
-	border: none;
-	background-color: $color-dark-3;
-	color: $color-light-2;
-	padding: 0.5rem;
-	width: 8rem;
-	font-size: 1.5rem;
-	border-radius: 5px;
-
-	&:hover {
-		cursor: pointer;
-		background-color: $color-main-2;
 	}
 }
 

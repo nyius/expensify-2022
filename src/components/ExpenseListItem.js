@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { connect, useSelector } from 'react-redux';
+import { startRemoveExpense } from '../actions/expensesActions';
 
-export const ExpenseListItem = ({ id, description, amount, createdAt }) => {
-	// console.log(props);
+const ExpenseListItem = ({ id, description, amount, createdAt, dispatch }) => {
+	const expenseState = useSelector(state => state.expenses);
+
 	return (
 		<div className="expense_list_item">
 			<div className="expense_list_item-description">
@@ -32,7 +35,12 @@ export const ExpenseListItem = ({ id, description, amount, createdAt }) => {
 				<Link to={`/edit/${id}`} className="expense_list_item-edit-Link">
 					Edit
 				</Link>
+				<button className="expense_list_item-remove" onClick={() => dispatch(startRemoveExpense({ id }))}>
+					Remove
+				</button>
 			</div>
 		</div>
 	);
 };
+
+export default connect()(ExpenseListItem);

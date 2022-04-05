@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { ExpenseForm } from '../components/ExpenseForm';
-import { editExpense } from '../actions/expensesActions';
+import { startEditExpense } from '../actions/expensesActions';
 
 const EditExpensePage = props => {
 	// in react-redux v6 we now need to use useParams to get info from the url
@@ -24,7 +24,7 @@ const EditExpensePage = props => {
 				edit={true}
 				// When this form is submitted, dispatch our edit
 				onSubmit={expense => {
-					props.dispatch(editExpense(id, expense));
+					props.dispatch(startEditExpense(id, expense));
 				}}
 			/>
 		</div>

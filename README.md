@@ -1,5 +1,7 @@
 # Expensify
 
+## View app live [here](https://expensify-tan.vercel.app/)
+
 A simple app built with React & firebase that allows users to login with the gmail accounts and keep track of their expenses.
 Databse stored on Firebase.
 Styled with Scss.

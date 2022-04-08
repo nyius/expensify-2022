@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { startLogin } from '../actions/authActions';
+import { FaGoogle } from 'react-icons/fa';
 
 const LoginForm = ({ dispatch }) => {
 	return (
 		<div className="login_form">
-			<input type="text" autoFocus placeholder="Enter username"></input>
-			<input type="password" placeholder="Enter password"></input>
-			<button>Log in</button>
-			<button onClick={() => dispatch(startLogin())}>Login With Google</button>
+			<button className="btn-login" onClick={() => dispatch(startLogin())}>
+				<FaGoogle /> Login With Google
+			</button>
 		</div>
 	);
 };
